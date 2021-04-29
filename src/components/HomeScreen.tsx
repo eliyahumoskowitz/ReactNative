@@ -17,7 +17,7 @@ export function HomeScreen({ navigation }: HomeScreenProps) {
                 className="fas"
                 style={styles.text}
             >
-                &#xf135; Hello World! from new Branch
+                &#xf135; Hello World!
             </label>
             <button
                 style={styles.button}
