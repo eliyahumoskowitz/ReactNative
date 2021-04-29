@@ -3,7 +3,7 @@
   "version": "8.0.1",
   "description": "NativeScript Application",
   "author": "Jamie Birch <14055146+shirakaba@users.noreply.github.com>",
-  "main": "src/app.ts",
+  "main": "app.js",
   "scripts": {
     "postinstall": "patch-package",
     "type-check": "tsc --noEmit",
@@ -38,22 +38,30 @@
     "template"
   ],
   "dependencies": {
-    "@nativescript/core": "~8.0.0",
-    "@react-navigation/core": "~5.13.2",
-    "react": "~16.13.1",
-    "react-nativescript": "~2.2.0",
-    "react-nativescript-navigation": "~2.0.1",
-    "react-refresh": "~0.8.3"
+    "@nativescript/core": "^7.1.0",
+    "@react-navigation/core": "^5.15.3",
+    "@types/ramda": "^0.27.39",
+    "ramda": "^0.27.1",
+    "react": "^16.13.1",
+    "react-nativescript": "^2.2.0",
+    "react-nativescript-navigation": "^2.0.1",
+    "react-refresh": "^0.8.3"
   },
   "devDependencies": {
-    "@nativescript/types": "~8.0.0",
-    "@nativescript/webpack": "beta",
-    "@pmmmwh/react-refresh-webpack-plugin": "~0.4.0-beta.5",
+    "@babel/core": "^7.4.5",
+    "@nativescript/android": "7.0.1",
+    "@nativescript/ios": "7.1.0",
+    "@nativescript/types": "7.0.4",
+    "@nativescript/webpack": "~4.0.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.0-beta.5",
     "@types/react": "16.9.34",
-    "patch-package": "~6.2.2",
-    "typescript": "~4.0.0"
+    "babel-loader": "8.0.6",
+    "copy-webpack-plugin": "^4.6.0",
+    "fork-ts-checker-webpack-plugin": "^5.1.0",
+    "patch-package": "^6.4.7",
+    "react-refresh": "^0.8.3",
+    "typescript": "^4.0.3"
   },
-  "gitHead": "1350d382fb4b0ed4c6e9685df909518b2688e004",
   "readme": "NativeScript Application",
   "private": "true"
 }
