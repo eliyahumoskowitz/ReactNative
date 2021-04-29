@@ -3,6 +3,7 @@ import { BaseNavigationContainer } from '@react-navigation/core';
 import { stackNavigatorFactory } from "react-nativescript-navigation";
 import { HomeScreen } from "./HomeScreen";
 import { SecondaryScreen } from "./SecondaryScreen";
+import { DisplayFormValues } from "./DisplayFormValues";
 
 const StackNavigator = stackNavigatorFactory();
 
@@ -24,6 +25,10 @@ export const mainStackNavigator = () => (
             <StackNavigator.Screen
                 name="Secondary"
                 component={SecondaryScreen}
+            />
+            <StackNavigator.Screen
+                name="DisplayFormValues"
+                component={DisplayFormValues}
             />
         </StackNavigator.Navigator>
     </BaseNavigationContainer>

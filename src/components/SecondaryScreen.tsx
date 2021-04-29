@@ -13,13 +13,13 @@ export function SecondaryScreen({ navigation }: SecondaryScreenProps) {
     return (
         <flexboxLayout style={styles.container}>
             <label style={styles.text}>
-                You're viewing the secondary screen!
+                You're looking at the secondary screen!
             </label>
             <button
                 style={styles.button}
-                onTap={() => navigation.goBack()}
+                onTap={() => navigation.navigate('Home')}//goBack()}
             >
-                Go back
+                Go back Home!!
             </button>
         </flexboxLayout>
     );
@@ -30,15 +30,17 @@ const styles = StyleSheet.create({
         height: "100%",
         flexDirection: "column",
         justifyContent: "center",
-        backgroundColor: "yellow",
+        backgroundColor: "pink",
     },
     text: {
         textAlignment: "center",
-        fontSize: 24,
-        color: "black",
+        // overflow: "auto",
+        fontSize: 20,
+        color: "green",
     },
     button: {
-        fontSize: 24,
+        fontSize: 20,
         color: "#2e6ddf",
+        backgroundColor: "yellow"
     },
 });
