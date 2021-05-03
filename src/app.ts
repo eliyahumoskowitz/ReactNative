@@ -11,6 +11,21 @@ purpose of the file is to pass control to the app’s first module.
 
 import * as ReactNativeScript from 'react-nativescript'
 import { mainStackNavigator as AppContainer } from './components/Navigator'
+import { android as andApp, AndroidApplication, exitEvent } from '@nativescript/core/application'
+import { Frame, isAndroid as isAnd, knownFolders } from '@nativescript/core'
+
+if (isAnd) {
+  andApp.on(AndroidApplication.activityBackPressedEvent, (args: any) => {
+      const frame = Frame.topmost()
+      if (frame && !frame.canGoBack()) args.cancel = true
+  })
+
+
+  andApp.on(exitEvent, (args) => {
+      console.log('clear temp folder')
+      knownFolders.temp().clear()
+  })
+}
 
 ReactNativeScript.start(React.createElement(AppContainer, {}, null))
 

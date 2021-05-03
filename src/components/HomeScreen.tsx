@@ -10,17 +10,11 @@ type HomeScreenProps = {
     navigation: FrameNavigationProp<MainStackParamList, "Home">,
 }
 
-export let exportformValues;
+
 
 export function HomeScreen({ navigation }: HomeScreenProps) {
 
-    let [formValues, setFormValues] = useState({
-        name: '',
-        email: '',
-        phone: '',
-        userName: ''
-    });
-    exportformValues = formValues;
+
 
     return (<>
         <flexboxLayout style={styles.container}>
@@ -28,7 +22,7 @@ export function HomeScreen({ navigation }: HomeScreenProps) {
                 className="fas"
                 style={styles.text}
             >
-                &#xf135; Hello {formValues.name || 'New Comer'}!
+                &#xf135; Hello World!
             </label>
             <button
                 style={styles.button}
@@ -38,50 +32,23 @@ export function HomeScreen({ navigation }: HomeScreenProps) {
             </button>
             <button
                 style={styles.button}
+                onTap={() => navigation.navigate('ToDo')}
+            >
+                Go to ToDo
+            </button>
+            <button
+                style={styles.button}
                 onTap={() => navigation.navigate('Secondary')}
             >
                 Go to Secondary
             </button>
         </flexboxLayout>
-
-        <flexboxLayout style={styles.container}>
-            <label
-                className="fas"
-                style={styles.text}
-            >
-                &#xf122; Hey! Submit Your Form!
-            </label>
-            <button
-                style={styles.button}
-                onTap={() => navigation.navigate('DisplayFormValues')}
-            >
-                Submit
-            </button>
-        </flexboxLayout>
-
-        <stackLayout backgroundColor="yellow" style={styles.input} >
-            <textField text={formValues.name} hint="Enter Name" onTextChange={e => setFormValues({...formValues, name: e.value})}/>
-        {/* </stackLayout> */}
-        {/* <stackLayout style={styles.input} backgroundColor="pink"> */}
-            <textField text={formValues.email} hint="Enter Email" onTextChange={e => setFormValues({...formValues, email: e.value})}/>
-        {/* </stackLayout> */}
-        {/* <stackLayout backgroundColor="yellow" style={styles.input}> */}
-            <textField text={formValues.phone} hint="Enter Phone" onTextChange={e => setFormValues({...formValues, phone: e.value})}/>
-        {/* </stackLayout> */}
-        {/* <stackLayout backgroundColor="pink" style={styles.input}> */}
-            <textField text={formValues.userName} hint="Enter User Name" onTextChange={e => setFormValues({...formValues, userName: e.value})} />
-        </stackLayout>
     </>);
 }
 
 const styles = StyleSheet.create({
     container: {
-        height: "70%",
-        flexDirection: "column",
-        justifyContent: "center",
-    },
-    input: {
-        height: "65%",
+        height: "100%",
         flexDirection: "column",
         justifyContent: "center",
     },

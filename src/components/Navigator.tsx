@@ -4,6 +4,7 @@ import { stackNavigatorFactory } from "react-nativescript-navigation";
 import { HomeScreen } from "./HomeScreen";
 import { SecondaryScreen } from "./SecondaryScreen";
 import { DisplayFormValues } from "./DisplayFormValues";
+import { ToDo } from "./ToDo";
 
 const StackNavigator = stackNavigatorFactory();
 
@@ -24,11 +25,24 @@ export const mainStackNavigator = () => (
             />
             <StackNavigator.Screen
                 name="Secondary"
+                options={{
+                    title: "Hello"
+                }}
                 component={SecondaryScreen}
             />
             <StackNavigator.Screen
                 name="DisplayFormValues"
+                options={{
+                    title: "Your Information"
+                }}
                 component={DisplayFormValues}
+            />
+             <StackNavigator.Screen
+                name="ToDo"
+                options={{
+                    title: "My To Do List"
+                }}
+                component={ToDo}
             />
         </StackNavigator.Navigator>
     </BaseNavigationContainer>

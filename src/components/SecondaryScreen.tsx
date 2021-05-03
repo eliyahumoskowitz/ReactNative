@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useState} from "react";
 import { RouteProp } from '@react-navigation/core';
 import { FrameNavigationProp } from "react-nativescript-navigation";
 import { MainStackParamList } from "./NavigationParamList";
@@ -10,7 +10,15 @@ type SecondaryScreenProps = {
 }
 
 export function SecondaryScreen({ navigation }: SecondaryScreenProps) {
-    return (
+
+    let [formValues, setFormValues] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        userName: ''
+    });
+
+    return (<>
         <flexboxLayout style={styles.container}>
             <label style={styles.text}>
                 You're looking at the secondary screen!
@@ -22,12 +30,33 @@ export function SecondaryScreen({ navigation }: SecondaryScreenProps) {
                 Go back Home!!
             </button>
         </flexboxLayout>
-    );
+        <flexboxLayout style={styles.container}>
+        <label
+            className="fas"
+            style={styles.text}
+        >
+            &#xf122; Hey! Submit Your Form!
+        </label>
+        <button
+            style={styles.button}
+            onTap={() => navigation.navigate('DisplayFormValues', {formValues})}
+        >
+            Submit
+        </button>
+    </flexboxLayout>
+
+    <stackLayout backgroundColor="yellow" style={styles.input} >
+        <textField text={formValues.name} hint="Enter Name" returnKeyType="next" onTextChange={e => setFormValues({...formValues, name: e.value})}/>
+        <textField text={formValues.email} hint="Enter Email" onTextChange={e => setFormValues({...formValues, email: e.value})}/>
+        <textField text={formValues.phone} hint="Enter Phone" onTextChange={e => setFormValues({...formValues, phone: e.value})}/>
+        <textField text={formValues.userName} hint="Enter User Name" onTextChange={e => setFormValues({...formValues, userName: e.value})} />
+    </stackLayout>
+    </>);
 }
 
 const styles = StyleSheet.create({
     container: {
-        height: "100%",
+        height: "70%",
         flexDirection: "column",
         justifyContent: "center",
         backgroundColor: "pink",
@@ -37,6 +66,11 @@ const styles = StyleSheet.create({
         // overflow: "auto",
         fontSize: 20,
         color: "green",
+    },
+    input: {
+        height: "65%",
+        flexDirection: "column",
+        justifyContent: "center",
     },
     button: {
         fontSize: 20,
