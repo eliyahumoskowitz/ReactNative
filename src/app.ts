@@ -20,7 +20,6 @@ if (isAnd) {
       if (frame && !frame.canGoBack()) args.cancel = true
   })
 
-
   andApp.on(exitEvent, (args) => {
       console.log('clear temp folder')
       knownFolders.temp().clear()
@@ -29,7 +28,9 @@ if (isAnd) {
 
 ReactNativeScript.start(React.createElement(AppContainer, {}, null))
 
+
 /*
 Do not place any code after the application has been started as it will not
 be executed on iOS.
 */
+

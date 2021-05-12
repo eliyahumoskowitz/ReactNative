@@ -38,6 +38,18 @@ export function HomeScreen({ navigation }: HomeScreenProps) {
             </button>
             <button
                 style={styles.button}
+                onTap={() => navigation.navigate('Weather')}
+            >
+                Get your Weather Forecast
+            </button>
+            {/* <button
+                style={styles.button}
+                onTap={() => navigation.navigate('List')}
+            >
+                Go to List
+            </button> */}
+            <button
+                style={styles.button}
                 onTap={() => navigation.navigate('Secondary')}
             >
                 Go to Secondary
@@ -51,6 +63,7 @@ const styles = StyleSheet.create({
         height: "100%",
         flexDirection: "column",
         justifyContent: "center",
+        backgroundColor: "lightblue",
     },
     text: {
         textAlignment: "center",
@@ -59,8 +72,10 @@ const styles = StyleSheet.create({
     },
     button: {
         fontSize: 24,
-        color: "white",
+        color: "pink",
         backgroundColor: "blue",
+        borderRadius: "25%",
+        margin: 10
         // height: "50%"
     },
 });

@@ -5,6 +5,8 @@ import { HomeScreen } from "./HomeScreen";
 import { SecondaryScreen } from "./SecondaryScreen";
 import { DisplayFormValues } from "./DisplayFormValues";
 import { ToDo } from "./ToDo";
+import { Weather } from "./Weather";
+// import { List } from "./List";
 
 const StackNavigator = stackNavigatorFactory();
 
@@ -44,6 +46,20 @@ export const mainStackNavigator = () => (
                 }}
                 component={ToDo}
             />
+               <StackNavigator.Screen
+                name="Weather"
+                options={{
+                    title: "Weather Forecast"
+                }}
+                component={Weather}
+            />
+            {/* <StackNavigator.Screen
+                name="List"
+                options={{
+                    title: "My List"
+                }}
+                component={List}
+            /> */}
         </StackNavigator.Navigator>
     </BaseNavigationContainer>
 );

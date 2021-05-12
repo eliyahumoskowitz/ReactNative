@@ -3,4 +3,6 @@ export type MainStackParamList = {
   Secondary: {}
   DisplayFormValues: {}
   ToDo: {}
+  Weather: {}
+  // List: {}
 }

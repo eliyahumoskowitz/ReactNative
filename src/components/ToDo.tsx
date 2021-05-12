@@ -14,81 +14,90 @@ export function ToDo({ navigation }: DisplayFormValuesScreenProps) {
     let [list, setList] = useState([]);
     let [input, setInput] = useState('');
     let [unique, setUnique] = useState(0);
-    // let [date, setDate] = useState(new Date().toDateString());
+    let [date, setDate] = useState(new Date());
+    let [search, setSearch] = useState('');
 
-    const setToDoList = text => {
-        console.log(text, "text")
-        if (text?.trim() > "") {
-            let newList = list
-            setUnique(++unique);
-            newList.push({text, id: unique});
-            setList(newList);
-           // input = '';
-            console.log("list", list)
-        }
+    const setToDoList = (text: string) => {
+        if (!text?.trim()) return
+
+        setUnique(++unique);
+        setList(list.concat({ text, id: unique }));
+        setInput('');
     };
+    // handleTextChanged
 
-    return (<>
-        {/* <datePicker
-            date={new Date()}
-            onDateChange={e => {
-                setDate(e.object.toString());
-                console.log('datePicker', date);
-            }}/> */}
+    const renderTodo = (todo) => {
+        return (
+            <flexboxLayout flexDirection="row" justifyContent="space-between" style={styles.flexList} key={todo.id} >
+                <label style={styles.label} text={`Please Remember to ${todo.text}`} height="70" textWrap={true} />
+                <button style={styles.deleteButton} onTap={() => {
+                    setList(list.filter(li => li.id != todo.id));
+                    console.log(list)
+                }} />
+            </flexboxLayout>
+        )
+    }
 
-        <stackLayout backgroundColor="pink" style={styles.container} >
+    return (
+        <stackLayout style={styles.container}>
+            <datePicker style={{height: "15%"}}
+                date={date}
+                onDateChange={e => {
+                    setDate(e.value);
+                }}
+            />
             <textView
                 text={input}
-                style={styles.input}
                 hint="Type a note here"
                 onTextChange={e => setInput(e.value)}
-                // onReturnKeyTypeChange={() => console.log('changed')}
-                // returnKeyType="go"
+            // onReturnKeyTypeChange={() => console.log('changed')}
+            // returnKeyType="go"
             />
-            <button style={styles.button} onTap={() => {setToDoList(input); console.log('this is input', input)}} >Add Note</button>
-        </stackLayout >
+            <button
+                style={styles.button}
+                onTap={() => { setToDoList(input) }}
+                text="Add Note"
+            />
+                <button style={styles.goHome} onTap={() => navigation.navigate("Home")}>Go Home</button>
+            <label
+                text={`on ${date.toDateString()}`}
+                dock="top"
+                height="40"
+                backgroundColor="#289062"
+                style={{ color: "purple", fontSize: 20, textAlignment: "center", fontWeight: "bold" }}
+            />
+                {list.length ? <><searchBar
+                                    hint="Search List"
+                                    text={search}
+                                    onTextChange={e => setSearch(e.value)}
+                                    /><button style={styles.deleteAll} text="Delete All" onTap={() => setList([])} /></> : null }
+                <scrollView style={{height: "100%"}}>
+                    <stackLayout>
+                        {list.filter(lf => lf.text.includes(search)).map(l => renderTodo(l))}
+                        {!list.length && <label text="Your To Do List is Empty" style={styles.empty} />}
+                        {list.length && !list.filter(lf => lf.text.includes(search)).length ? <label text="Search came up empty" style={styles.empty} /> : null }
+                    </stackLayout>
+                </scrollView>
 
-        <button style={styles.goHome} onTap={() => navigation.navigate("Home")}>Go Home</button>
-
-        <dockLayout stretchLastChild="true" backgroundColor="lightblue" style={styles.list}>
-            <label text="" dock="left" width="40" backgroundColor="#43b783" />
-            <label text={`To Do on ${new Date().toDateString() /*date*/ }`}dock="top" height="40" backgroundColor="#289062" style={{color: "purple", fontSize: 20, textAlignment: "center", fontWeight: "bold"}}/>
-            <label text="" dock="right" width="40" backgroundColor="#43b783" />
-            <label text="" dock="bottom" height="40" backgroundColor="#289062" />
-            {list.length ? <scrollView><stackLayout  >
-                {list.map(l => {
-                    return <flexboxLayout flexDirection="row" justifyContent="space-between" style={styles.flexList} key={l.id} >
-                    <label style={styles.label} text={`Please Remember to ${l.text}`} height="70" />
-                    <button style={styles.deleteButton} onTap={() => {
-                        setList(list.filter(li => li.id != l.id));
-                         console.log(list)}} />
-                    </flexboxLayout>
-                })}
-            </stackLayout></scrollView> : <label text="Your To Do List is Empty" style={styles.empty} ></label> }
-        </dockLayout>
-    </>);
+        </stackLayout>
+    );
 }
 
 const styles = StyleSheet.create({
     container: {
-        height: '25%',
-        MinHeight: "25%",
-        // marginTop: "5%"
-        // flexDirection: "column",
-        // justifyContent: "center",
-        // verticalAlignment: "middle"
     },
-    input: {
-        height: "65%",
-        // flexDirection: "column",
-        // justifyContent: "center",
-        textAlignment: "center"
+    deleteAll: {
+        fontSize: 20,
+        fontFamily: "",
+        color: "#2e5ddf",
+        backgroundColor: "lightgreen",
+        height: "9%"
     },
     label: {
         fontSize: 20,
         // display: "inline"
     },
-    flexList:{
+    flexList: {
         // flexDirection: "column",
         // justifyContent: "center",
         backgroundColor: "yellow",
@@ -108,10 +117,7 @@ const styles = StyleSheet.create({
     },
     button: {
         fontSize: 14,
-        width: "30%",
-        // textAlignment: "center",
-        marginRight: "55%",
-        marginTop: "5%",
+        marginTop: 10,
         color: "white",
         backgroundColor: "blue",
         // borderColor: "yellow",
@@ -120,23 +126,23 @@ const styles = StyleSheet.create({
     deleteButton: {
         backgroundImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgRvB74YdMnrggPyzKvkx6c5WUB7YZyELYPg&amp;usqp=CAU",
         backgroundRepeat: "no-repeat",
-        width: "15%",
+        minWidth: "25%",
         height: "20%",
         display: "inline"
     },
     empty: {
-      textAlignment: 'center',
-      color: "red",
-      fontStyle: "italic",
-      fontWeight: "bold",
-      fontSize: 20,
-      paddingTop: "50%"
+        textAlignment: 'center',
+        color: "red",
+        fontStyle: "italic",
+        fontWeight: "bold",
+        fontSize: 20,
+        paddingTop: "50%"
     },
     goHome: {
         fontSize: 20,
         color: "#2e6ddf",
-        backgroundColor: "yellow",
-        // height: "12%"
+        backgroundColor: "pink",
+        height: "9%"
     }
 });
 // // #2e6ddf
