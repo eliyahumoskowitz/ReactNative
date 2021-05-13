@@ -12,7 +12,6 @@ type DisplayFormValuesScreenProps = {
 
 export function Weather({ navigation }: DisplayFormValuesScreenProps) {
     const apiKey = '560dcb7398e09264815a14af891179c4';
-    // let zip = '08701';
 
     let [zip, setZip] = useState('');
     let [loading, setLoading] = useState(false);

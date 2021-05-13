@@ -46,12 +46,19 @@ export function ToDo({ navigation }: DisplayFormValuesScreenProps) {
                     setDate(e.value);
                 }}
             />
-            <textView
+            {/* <textView
                 text={input}
                 hint="Type a note here"
                 onTextChange={e => setInput(e.value)}
+                // onSubmit
             // onReturnKeyTypeChange={() => console.log('changed')}
             // returnKeyType="go"
+            /> */}
+            <searchBar
+                hint="Type a note here"
+                text={input}
+                onTextChange={e => setInput(e.value)}
+                onSubmit={() => { setToDoList(input) }}
             />
             <button
                 style={styles.button}
