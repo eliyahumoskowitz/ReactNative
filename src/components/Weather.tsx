@@ -62,7 +62,7 @@ export function Weather({ navigation }: DisplayFormValuesScreenProps) {
             <label text={typeof(weather.temp) === 'number' ? `Tempature: \n\n${weather.temp} ° Farenheit` : `\n\n${weather.temp}`} row={0} col={1} textWrap={true} style={styles.input} />
             <label text={weather.description} row={0} col={2} textWrap={true} style={styles.input} />
             <label text={weather.feel ? `Real Feel: \n\n${weather.feel} ° Farenheit` : ''} row={1} col={0}  textWrap={true} style={styles.input} />
-            <label text={weather.humidity ? `Humidity: \n\n${weather.humidity} ° Farenheit` : ''} row={1} col={1} textWrap={true} style={styles.input} />
+            <label text={weather.humidity ? `Humidity: \n\n${weather.humidity}` : ''} row={1} col={1} textWrap={true} style={styles.input} />
             <label backgroundImage={weather.icon} row={1} col={2} textWrap={true} style={styles.icon} />
             {/* <image src={weather.icon}  /> */}
         </gridLayout>}
